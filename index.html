@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lord Style Barbearia - Estilo, presença e personalidade em cada corte. Agende seu horário.">
+<title>Lord Style Barbearia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#111;
+  --black-soft:#1a1a1a;
+  --black-card:#222;
+  --gold:#c9a84c;
+  --gold-light:#e2c97e;
+  --gold-dark:#a8872e;
+  --white:#f5f5f5;
+  --white-pure:#fff;
+  --gray:#888;
+  --gray-dark:#333;
+  --red:#8b2020;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Montserrat','Helvetica Neue',Arial,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--black);color:var(--white);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:4px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s}
+nav.scrolled{background:rgba(17,17,17,.97);box-shadow:0 2px 30px rgba(0,0,0,.5)}
+nav .logo-img{height:50px;width:50px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+nav ul{list-style:none;display:flex;gap:2rem}
+nav ul li a{font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);transition:color .3s;font-weight:500}
+nav ul li a:hover{color:var(--gold)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.nav-toggle span{width:28px;height:2px;background:var(--gold);transition:transform .3s,opacity .3s}
+.nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.active span:nth-child(2){opacity:0}
+.nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('hero-bg.jpg') center/cover no-repeat;filter:brightness(.35)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.3) 50%,rgba(17,17,17,1) 100%)}
+.hero-content{position:relative;z-index:2;max-width:800px;padding:2rem;animation:fadeUp 1.2s ease}
+.hero-logo{width:180px;height:180px;margin:0 auto 1.5rem;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 0 30px rgba(201,168,76,.35)}
+.hero-content h1{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5rem);font-weight:900;color:var(--gold);line-height:1.1;margin-bottom:.5rem;text-shadow:0 4px 30px rgba(201,168,76,.3)}
+.hero-content .subtitle{font-size:clamp(1rem,2vw,1.3rem);color:var(--white);font-weight:300;letter-spacing:2px;margin-bottom:2.5rem;opacity:.9}
+.hero-content .divider{width:80px;height:2px;background:var(--gold);margin:1.5rem auto}
+.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;border-radius:4px;font-family:var(--font-body);font-size:.9rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:all .35s ease}
+.btn-primary{background:var(--gold);color:var(--black);box-shadow:0 4px 25px rgba(201,168,76,.35)}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 35px rgba(201,168,76,.5)}
+.btn-outline{background:transparent;color:var(--gold);border:1.5px solid var(--gold)}
+.btn-outline:hover{background:var(--gold);color:var(--black);transform:translateY(-2px)}
+.btn-sm{padding:.65rem 1.5rem;font-size:.8rem}
+
+/* SECTION */
+.section{padding:6rem 2rem}
+.section-title{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--gold);text-align:center;margin-bottom:.5rem}
+.section-subtitle{text-align:center;color:var(--gray);font-weight:300;letter-spacing:1px;margin-bottom:3.5rem;font-size:.95rem}
+.container{max-width:1200px;margin:0 auto}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.service-card{background:var(--black-card);border:1px solid rgba(201,168,76,.15);border-radius:8px;padding:2.5rem 1.5rem;text-align:center;transition:all .4s ease;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:3px;background:var(--gold);transition:width .4s}
+.service-card:hover::before{width:100%}
+.service-card:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 15px 40px rgba(201,168,76,.12)}
+.service-card .icon{font-size:2.5rem;margin-bottom:1rem}
+.service-card h3{font-family:var(--font-display);font-size:1.15rem;color:var(--gold-light);margin-bottom:.5rem}
+.service-card p{color:var(--gray);font-size:.85rem;font-weight:300}
+
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.gallery-item{position:relative;overflow:hidden;border-radius:6px;aspect-ratio:4/3;cursor:pointer;background:var(--black-card)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .4s}
+.gallery-item:hover img{transform:scale(1.08);filter:brightness(.7)}
+.gallery-item .gallery-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;background:rgba(201,168,76,.15)}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-overlay span{color:var(--gold);font-size:2rem}
+
+/* BARBER */
+.barber-section{background:var(--black-soft)}
+.barber-content{display:flex;align-items:center;gap:3rem;max-width:900px;margin:0 auto;flex-wrap:wrap}
+.barber-photo{flex:0 0 300px;border-radius:10px;overflow:hidden;border:2px solid rgba(201,168,76,.2)}
+.barber-photo img{width:100%;height:400px;object-fit:cover}
+.barber-info{flex:1;min-width:280px}
+.barber-info h3{font-family:var(--font-display);font-size:1.6rem;color:var(--gold);margin-bottom:1rem}
+.barber-info p{color:var(--gray);font-size:.95rem;line-height:1.8;margin-bottom:1rem}
+
+/* REVIEWS */
+.reviews-section{background:var(--black)}
+.reviews-header{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-bottom:.3rem}
+.reviews-header .google-icon{font-size:1.6rem}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.review-card{background:var(--black-card);border:1px solid rgba(201,168,76,.12);border-radius:10px;padding:2rem;position:relative}
+.review-card .stars{color:var(--gold);font-size:1.1rem;margin-bottom:.8rem;letter-spacing:2px}
+.review-card .review-text{color:var(--white);font-size:.9rem;font-style:italic;line-height:1.7;margin-bottom:1.2rem;opacity:.9}
+.review-card .review-author{color:var(--gold-light);font-weight:600;font-size:.9rem}
+.review-card .review-source{color:var(--gray);font-size:.75rem;margin-top:.3rem}
+
+/* BOOKING */
+#agendamento{background:var(--black-soft)}
+.booking-container{max-width:700px;margin:0 auto}
+.step-indicator{display:flex;justify-content:center;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:.5rem;color:var(--gray);font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
+.step.active{color:var(--gold)}
+.step .num{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--gray);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.8rem;transition:all .3s}
+.step.active .num{border-color:var(--gold);background:var(--gold);color:var(--black)}
+.step-arrow{color:var(--gray-dark);font-size:.8rem;align-self:center}
+
+.booking-step{display:none}
+.booking-step.visible{display:block;animation:fadeUp .5s ease}
+
+.service-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.service-option{background:var(--black-card);border:1.5px solid var(--gray-dark);border-radius:8px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all .3s}
+.service-option:hover,.service-option.selected{border-color:var(--gold);background:rgba(201,168,76,.08)}
+.service-option.selected{box-shadow:0 0 20px rgba(201,168,76,.15)}
+.service-option h4{font-family:var(--font-display);color:var(--gold-light);font-size:1rem;margin-bottom:.3rem}
+
+.calendar{background:var(--black-card);border-radius:10px;padding:1.5rem;border:1px solid rgba(201,168,76,.1)}
+.calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.calendar-header h3{font-family:var(--font-display);color:var(--gold);font-size:1.1rem}
+.calendar-header button{background:none;border:1px solid var(--gold);color:var(--gold);width:35px;height:35px;border-radius:50%;cursor:pointer;font-size:1rem;transition:all .3s;display:flex;align-items:center;justify-content:center}
+.calendar-header button:hover{background:var(--gold);color:var(--black)}
+.calendar-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:.5rem}
+.calendar-weekdays span{text-align:center;font-size:.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.calendar-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.calendar-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:.9rem;cursor:pointer;transition:all .3s;font-weight:500}
+.calendar-day.empty{cursor:default}
+.calendar-day.available:hover,.calendar-day.selected{background:var(--gold);color:var(--black);font-weight:700}
+.calendar-day.unavailable{color:var(--gray-dark);cursor:not-allowed;text-decoration:line-through}
+.calendar-day.past{color:var(--gray-dark);cursor:not-allowed;opacity:.4}
+
+.time-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.75rem;margin-top:1.5rem}
+.time-slot{padding:.75rem;text-align:center;border:1.5px solid var(--gray-dark);border-radius:6px;cursor:pointer;transition:all .3s;font-weight:500;font-size:.9rem}
+.time-slot:hover,.time-slot.selected{border-color:var(--gold);background:var(--gold);color:var(--black)}
+
+.booking-summary{background:var(--black-card);border:1px solid var(--gold);border-radius:10px;padding:2rem;margin-top:2rem;text-align:center}
+.booking-summary h3{font-family:var(--font-display);color:var(--gold);margin-bottom:1rem;font-size:1.3rem}
+.booking-summary .detail{margin:.5rem 0;color:var(--white);font-size:.95rem}
+.booking-summary .detail strong{color:var(--gold-light)}
+.booking-nav{display:flex;justify-content:center;gap:1rem;margin-top:2rem}
+
+/* PIX */
+.pix-section{background:var(--black);display:none}
+.pix-section.visible{display:block}
+.pix-container{max-width:500px;margin:0 auto;text-align:center}
+.pix-summary{background:var(--black-card);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:1.5rem;margin-bottom:2rem;text-align:left}
+.pix-summary h4{font-family:var(--font-display);color:var(--gold);margin-bottom:.8rem;font-size:1.1rem;text-align:center}
+.pix-summary .detail{margin:.4rem 0;color:var(--white);font-size:.9rem}
+.pix-summary .detail strong{color:var(--gold-light)}
+.pix-container .qr-wrap{background:var(--white-pure);border-radius:12px;padding:1.5rem;display:inline-block;margin:1.5rem 0}
+.pix-container .qr-wrap img{width:200px;height:200px}
+.pix-key{background:var(--black-card);border:1px solid var(--gold);border-radius:8px;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:1.5rem 0;flex-wrap:wrap}
+.pix-key span{color:var(--gold-light);font-size:1.1rem;font-weight:600;letter-spacing:1px}
+.pix-notices{margin-top:2rem;text-align:left}
+.pix-notices p{color:var(--gray);font-size:.85rem;margin:.5rem 0;padding-left:1.5rem;position:relative}
+.pix-notices p::before{content:'⚠';position:absolute;left:0}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--gold);color:var(--black);padding:.8rem 2rem;border-radius:6px;font-weight:600;font-size:.9rem;z-index:9999;transition:transform .4s ease;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* LOCATION */
+.location-section{background:var(--black-soft)}
+.location-content{max-width:700px;margin:0 auto;text-align:center}
+.location-content .address{color:var(--white);font-size:1.05rem;margin-bottom:2rem;line-height:1.7}
+.location-content .address span{color:var(--gold-light);display:block;font-weight:500}
+.location-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:var(--black-soft);border-top:1px solid rgba(201,168,76,.15);padding:3rem 2rem;text-align:center}
+footer .footer-brand{font-family:var(--font-display);font-size:1.5rem;color:var(--gold);margin-bottom:.5rem}
+footer .footer-text{color:var(--gray);font-size:.85rem;max-width:400px;margin:0 auto 1.5rem;font-weight:300}
+footer .footer-copy{color:var(--gray-dark);font-size:.75rem;margin-top:1.5rem;letter-spacing:1px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav ul{position:fixed;top:0;right:-100%;width:70%;height:100vh;background:rgba(17,17,17,.98);flex-direction:column;justify-content:center;align-items:center;gap:2.5rem;transition:right .4s ease}
+  nav ul.open{right:0}
+  .nav-toggle{display:flex}
+  .hero-content h1{font-size:2.2rem}
+  .hero-logo{width:130px;height:130px}
+  .section{padding:4rem 1.2rem}
+  .services-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:.75rem}
+  .pix-key{flex-direction:column;text-align:center}
+  .booking-nav{flex-direction:column;align-items:center}
+  .barber-content{flex-direction:column;text-align:center}
+  .barber-photo{flex:0 0 auto;width:100%;max-width:350px}
+  .reviews-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .gallery-grid{grid-template-columns:1fr}
+  .service-select-grid{grid-template-columns:1fr 1fr}
+  .time-grid{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#"><img src="logo-lordstyle.jpg" alt="Lord Style Barbearia" class="logo-img"></a>
+  <div class="nav-toggle" id="navToggle">
+    <span></span><span></span><span></span>
+  </div>
+  <ul id="navMenu">
+    <li><a href="#servicos" onclick="closeMenu()">Serviços</a></li>
+    <li><a href="#galeria" onclick="closeMenu()">Galeria</a></li>
+    <li><a href="#barbeiro" onclick="closeMenu()">Barbeiro</a></li>
+    <li><a href="#agendamento" onclick="closeMenu()">Agendar</a></li>
+    <li><a href="#localizacao" onclick="closeMenu()">Local</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="logo-lordstyle.jpg" alt="Lord Style Barbearia" class="hero-logo">
+    <h1>Lord Style Barbearia</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Estilo, presença e personalidade em cada corte</p>
+    <div class="hero-buttons">
+      <a href="#agendamento" class="btn btn-primary">&#9986; Agendar Horário</a>
+      <a href="https://wa.me/5511990157513" target="_blank" class="btn btn-outline">&#128172; Falar no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="section" id="servicos">
+  <div class="container">
+    <h2 class="section-title reveal">Nossos Serviços</h2>
+    <p class="section-subtitle reveal">Experiência premium em cada detalhe</p>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="icon">&#9986;&#65039;</div>
+        <h3>Corte Masculino</h3>
+        <p>Cortes modernos e clássicos com acabamento perfeito</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="icon">&#129698;</div>
+        <h3>Barba</h3>
+        <p>Modelagem e aparação profissional com navalha</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="icon">&#128136;</div>
+        <h3>Corte + Barba</h3>
+        <p>Combo completo para o visual perfeito</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="icon">&#128065;&#65039;</div>
+        <h3>Sobrancelha</h3>
+        <p>Design e limpeza com precisão e cuidado</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="section" id="galeria" style="background:var(--black-soft)">
+  <div class="container">
+    <h2 class="section-title reveal">Galeria</h2>
+    <p class="section-subtitle reveal">Conheça nosso espaço e trabalho</p>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><img src="barbearia1.jpg" alt="Corte masculino"><div class="gallery-overlay"><span>+</span></div></div>
+      <div class="gallery-item reveal"><img src="barbearia2.jpg" alt="Corte com design"><div class="gallery-overlay"><span>+</span></div></div>
+      <div class="gallery-item reveal"><img src="corte1.jpg" alt="Corte afro"><div class="gallery-overlay"><span>+</span></div></div>
+      <div class="gallery-item reveal"><img src="corte2.jpg" alt="Corte com desenho"><div class="gallery-overlay"><span>+</span></div></div>
+      <div class="gallery-item reveal"><img src="corte3.jpg" alt="Corte com teia"><div class="gallery-overlay"><span>+</span></div></div>
+      
+      <div class="gallery-item reveal"><img src="cliente1.jpg" alt="Cliente"><div class="gallery-overlay"><span>+</span></div></div>
+      <div class="gallery-item reveal"><img src="cliente2.jpg" alt="Platinado"><div class="gallery-overlay"><span>+</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BARBEIRO -->
+<section class="section barber-section" id="barbeiro">
+  <div class="container">
+    <h2 class="section-title reveal">Conheça o Barbeiro</h2>
+    <p class="section-subtitle reveal">Quem está por trás de cada corte</p>
+    <div class="barber-content reveal">
+      <div class="barber-photo">
+        <img src="barbeiro.jpg" alt="Willian Gomes - Barbeiro">
+      </div>
+      <div class="barber-info">
+        <h3>Willian Gomes</h3>
+        <p>Com anos de experiência na barbearia, Willian construiu sua reputação através de um trabalho cuidadoso e atencioso. Cada corte é pensado para valorizar o estilo e a personalidade do cliente.</p>
+        <p>Especializado em degradês, cortes com design e barba, ele se dedica a entregar um resultado que vai além do esperado — com atenção aos detalhes, ambiente acolhedor e um atendimento que faz o cliente se sentir em casa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section class="section reviews-section" id="avaliacoes">
+  <div class="container">
+    <div class="reviews-header reveal">
+      <span class="google-icon">&#11088;</span>
+      <h2 class="section-title" style="margin-bottom:0">Avaliações do Google</h2>
+    </div>
+    <p class="section-subtitle reveal">O que nossos clientes dizem</p>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Ótimo atendimento, ambiente super confortável, cortes com perfeição, um excelente profissional. Super recomendo o melhor da região."</p>
+        <div class="review-author">União Play</div>
+        <div class="review-source">Avaliação no Google</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Barbearia top, ambiente climatizado, produtos de qualidade, o barbeiro atencioso, melhor barbearia da região."</p>
+        <div class="review-author">Vitor Rodrigues</div>
+        <div class="review-source">Avaliação no Google</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Atendimento ótimo, ambiente climatizado e cafezinho fresquinho."</p>
+        <div class="review-author">Débora Dias</div>
+        <div class="review-source">Avaliação no Google</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDAMENTO -->
+<section class="section" id="agendamento">
+  <div class="container">
+    <h2 class="section-title reveal">Agende seu Horário</h2>
+    <p class="section-subtitle reveal">Escolha o serviço, dia e horário ideal para você</p>
+    <div class="booking-container">
+      <div class="step-indicator">
+        <div class="step active" id="stepInd1"><span class="num">1</span> Serviço</div>
+        <span class="step-arrow">›</span>
+        <div class="step" id="stepInd2"><span class="num">2</span> Data</div>
+        <span class="step-arrow">›</span>
+        <div class="step" id="stepInd3"><span class="num">3</span> Horário</div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="booking-step visible" id="bookingStep1">
+        <div class="service-select-grid">
+          <div class="service-option" data-service="Corte Masculino" onclick="selectService(this)"><h4>&#9986;&#65039; Corte Masculino</h4></div>
+          <div class="service-option" data-service="Barba" onclick="selectService(this)"><h4>&#129698; Barba</h4></div>
+          <div class="service-option" data-service="Corte + Barba" onclick="selectService(this)"><h4>&#128136; Corte + Barba</h4></div>
+          <div class="service-option" data-service="Sobrancelha" onclick="selectService(this)"><h4>&#128065;&#65039; Sobrancelha</h4></div>
+        </div>
+        <div class="booking-nav">
+          <button class="btn btn-primary" onclick="goToStep(2)" id="btnToStep2" disabled>Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="booking-step" id="bookingStep2">
+        <div class="calendar" id="calendar"></div>
+        <div class="booking-nav">
+          <button class="btn btn-outline btn-sm" onclick="goToStep(1)">&#8592; Voltar</button>
+          <button class="btn btn-primary" onclick="goToStep(3)" id="btnToStep3" disabled>Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="booking-step" id="bookingStep3">
+        <h3 style="color:var(--gold);font-family:var(--font-display);text-align:center;margin-bottom:1rem" id="selectedDateLabel"></h3>
+        <div class="time-grid" id="timeGrid"></div>
+        <div class="booking-nav">
+          <button class="btn btn-outline btn-sm" onclick="goToStep(2)">&#8592; Voltar</button>
+        </div>
+        <div class="booking-summary" id="bookingSummary" style="display:none">
+          <h3>Resumo do Agendamento</h3>
+          <p class="detail"><strong>Serviço:</strong> <span id="sumService"></span></p>
+          <p class="detail"><strong>Data:</strong> <span id="sumDate"></span></p>
+          <p class="detail"><strong>Horário:</strong> <span id="sumTime"></span></p>
+          <div style="margin-top:1.5rem">
+            <button class="btn btn-primary" onclick="showPayment()">Ir para Pagamento &#8594;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGAMENTO (oculto até seleção completa) -->
+<section class="section pix-section" id="pagamento">
+  <div class="container">
+    <h2 class="section-title">Pagamento via Pix</h2>
+    <p class="section-subtitle">Escaneie o QR Code ou copie a chave abaixo</p>
+    <div class="pix-container">
+      <div class="pix-summary">
+        <h4>Resumo do Agendamento</h4>
+        <p class="detail"><strong>Serviço:</strong> <span id="pixService"></span></p>
+        <p class="detail"><strong>Data:</strong> <span id="pixDate"></span></p>
+        <p class="detail"><strong>Horário:</strong> <span id="pixTime"></span></p>
+      </div>
+      <div class="qr-wrap">
+        <img src="qrcode.png" alt="QR Code Pix">
+      </div>
+      <div class="pix-key">
+        <span id="pixKeyText">(11) 99015-7513</span>
+        <button class="btn btn-primary btn-sm" onclick="copyPix()">&#128203; Copiar chave Pix</button>
+      </div>
+      <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="confirmPayment()">&#9989; Já paguei</button>
+      </div>
+      <div class="pix-notices">
+        <p>O agendamento será confirmado somente após a verificação do pagamento.</p>
+        <p>Após o envio, aguarde a confirmação pelo WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section class="section location-section" id="localizacao">
+  <div class="container">
+    <h2 class="section-title reveal">Localização</h2>
+    <p class="section-subtitle reveal">Venha nos visitar</p>
+    <div class="location-content reveal">
+      <div class="address">
+        <span>&#128205; Endereço:</span>
+        Rua Londres, 206, Jardim Liliane<br>
+        Francisco Morato — São Paulo
+      </div>
+      <div class="location-buttons">
+        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Londres+206+Jardim+Liliane+Francisco+Morato+SP" target="_blank" class="btn btn-primary btn-sm">&#128506; Abrir no Google Maps</a>
+        <a href="https://share.google/DsR2OVWKogDt8nBIr" target="_blank" class="btn btn-outline btn-sm">&#11088; Google Meu Negócio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Lord Style Barbearia</div>
+  <p class="footer-text">Mais do que uma barbearia — uma experiência de estilo, confiança e personalidade. Atendimento premium para o homem moderno.</p>
+  <a href="https://wa.me/5511990157513" target="_blank" class="btn btn-outline btn-sm">&#128172; WhatsApp</a>
+  <p class="footer-copy">&copy; 2025 Lord Style Barbearia. Todos os direitos reservados.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var navbar=document.getElementById('navbar'),navToggle=document.getElementById('navToggle'),navMenu=document.getElementById('navMenu');
+window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>50)});
+navToggle.addEventListener('click',function(){navToggle.classList.toggle('active');navMenu.classList.toggle('open')});
+function closeMenu(){navToggle.classList.remove('active');navMenu.classList.remove('open')}
+
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+
+var selectedService='',selectedDate=null,selectedTime='';
+var currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear();
+
+function selectService(el){
+  document.querySelectorAll('.service-option').forEach(function(o){o.classList.remove('selected')});
+  el.classList.add('selected');
+  selectedService=el.getAttribute('data-service');
+  document.getElementById('btnToStep2').disabled=false;
+}
+
+function goToStep(n){
+  document.querySelectorAll('.booking-step').forEach(function(s){s.classList.remove('visible')});
+  document.getElementById('bookingStep'+n).classList.add('visible');
+  for(var i=1;i<=3;i++){
+    var s=document.getElementById('stepInd'+i);
+    if(i<=n) s.classList.add('active'); else s.classList.remove('active');
+  }
+  if(n===2)renderCalendar();
+  if(n===3)renderTimeSlots();
+}
+
+var dayNames=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+var monthNames=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+function renderCalendar(){
+  var today=new Date();today.setHours(0,0,0,0);
+  var first=new Date(currentYear,currentMonth,1);
+  var lastDay=new Date(currentYear,currentMonth+1,0).getDate();
+  var startDay=first.getDay();
+  var html='<div class="calendar-header"><button onclick="changeMonth(-1)">&#8249;</button><h3>'+monthNames[currentMonth]+' '+currentYear+'</h3><button onclick="changeMonth(1)">&#8250;</button></div>';
+  html+='<div class="calendar-weekdays">';
+  dayNames.forEach(function(d){html+='<span>'+d+'</span>'});
+  html+='</div><div class="calendar-days">';
+  for(var i=0;i<startDay;i++) html+='<div class="calendar-day empty"></div>';
+  for(var d=1;d<=lastDay;d++){
+    var date=new Date(currentYear,currentMonth,d);
+    var dow=date.getDay();
+    var isPast=date<today;
+    var isMonday=dow===1;
+    var isSelected=selectedDate&&date.toDateString()===selectedDate.toDateString();
+    var cls='calendar-day';
+    if(isPast){cls+=' past'}
+    else if(isMonday){cls+=' unavailable'}
+    else{cls+=' available';if(isSelected) cls+=' selected'}
+    var onclick=(!isPast&&!isMonday)?(' onclick="pickDate('+currentYear+','+currentMonth+','+d+')"'):'';
+    html+='<div class="'+cls+'"'+onclick+'>'+d+'</div>';
+  }
+  html+='</div>';
+  document.getElementById('calendar').innerHTML=html;
+}
+
+function changeMonth(dir){
+  currentMonth+=dir;
+  if(currentMonth>11){currentMonth=0;currentYear++}
+  if(currentMonth<0){currentMonth=11;currentYear--}
+  renderCalendar();
+}
+
+function pickDate(y,m,d){
+  selectedDate=new Date(y,m,d);
+  document.getElementById('btnToStep3').disabled=false;
+  renderCalendar();
+}
+
+function renderTimeSlots(){
+  if(!selectedDate)return;
+  var dow=selectedDate.getDay();
+  var endHour=dow===0?14:20;
+  var startHour=10;
+  var dateStr=selectedDate.toLocaleDateString('pt-BR');
+  document.getElementById('selectedDateLabel').textContent=dateStr;
+  var html='';
+  for(var h=startHour;h<endHour;h++){
+    var t=(h<10?'0':'')+h+':00';
+    var isSelected=selectedTime===t;
+    var cls='time-slot';
+    if(isSelected){cls+=' selected'}
+    html+='<div class="'+cls+'" onclick="pickTime(\''+t+'\')">'+t+'</div>';
+  }
+  document.getElementById('timeGrid').innerHTML=html;
+}
+
+function pickTime(t){
+  selectedTime=t;
+  renderTimeSlots();
+  var summary=document.getElementById('bookingSummary');
+  summary.style.display='block';
+  document.getElementById('sumService').textContent=selectedService;
+  document.getElementById('sumDate').textContent=selectedDate.toLocaleDateString('pt-BR');
+  document.getElementById('sumTime').textContent=selectedTime;
+}
+
+function showPayment(){
+  document.getElementById('pixService').textContent=selectedService;
+  document.getElementById('pixDate').textContent=selectedDate.toLocaleDateString('pt-BR');
+  document.getElementById('pixTime').textContent=selectedTime;
+  var sec=document.getElementById('pagamento');
+  sec.classList.add('visible');
+  sec.scrollIntoView({behavior:'smooth'});
+}
+
+function copyPix(){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText('(11) 99015-7513').then(function(){showToast('Chave Pix copiada!')});
+  }else{
+    var ta=document.createElement('textarea');ta.value='(11) 99015-7513';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Chave Pix copiada!');
+  }
+}
+
+function confirmPayment(){
+  var dateStr=selectedDate?selectedDate.toLocaleDateString('pt-BR'):'não selecionada';
+  var timeStr=selectedTime||'não selecionado';
+  var serviceStr=selectedService||'não selecionado';
+  var msg=encodeURIComponent('Olá, gostaria de confirmar meu agendamento.\n\nServiço: '+serviceStr+'\nData: '+dateStr+'\nHorário: '+timeStr+'\n\nAcabei de realizar o pagamento via Pix.');
+  window.open('https://wa.me/5511990157513?text='+msg,'_blank');
+}
+
+function showToast(text){
+  var t=document.getElementById('toast');t.textContent=text;t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show')},2500);
+}
+</script>
+</body>
+</html>
